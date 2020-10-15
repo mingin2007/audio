@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    html, body {
+        font-family: Arial, Helvetica, sans-serif;
+        height: 100%;
+        margin-top:0px;
+        margin-bottom: 0px;
+    }
+    .words{
+        position: relative;
+        width: 50%;
+        height: 70%;
+        border: solid 5px white;
+        font-size: xx-large;
+        color: cornsilk;
+    }
+
+    #left{
+        background-color: blueviolet;
+        float: left;
+    }
+
+    #right{
+        background-color: cornflowerblue;
+
+    }
+    #top-div, #bot-div{
+        height: 15%;
+        width: 100%;
+        display: table;
+        text-align: center;
+    }
+    span{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    #replay{
+        position: fixed;
+        right: 20px;
+        top: 20px;
+    }
+    #skip{
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+    }
+</style>
+<script>
+    window.onload = function(){
+        var words = [
+            ["01.ogg", "κάστρο", "κάστανο"],
+            ["02.ogg", "δύο", "άδειο"],            
+            ["03.ogg", "τρία", "τρίχα"],
+            ["04.ogg", "τέσσερα", "τέλος"],
+            ["05.ogg", "πέντε", "πάντα"],
+            ["06.ogg", "έξι", "έξω"],
+            ["07.ogg", "εφτά", "έφτασε"],
+            ["08.ogg", "εφτά", "έφτασε"]
+        ];
+        
+
+        words.sort(()=> Math.random() - 0.5);
+
+        var rep = document.querySelector("#replay");
+        var aud = document.querySelector("audio");
+        var left = document.querySelector("#left");
+        var right = document.querySelector("#right");
+
+        rep.onclick = function(){
+            if(words.length){
+                let elmn = words.pop(); 
+                aud.src = elmn[0];
+                left.textContent = elmn[1];
+                right.textContent = elmn[2];
+                aud.play();
+            }else{
+                alert("Έφτασες στο τέλος!")
+            }
+        }
+
+           
+    }
+</script>
+
+
+</head>
+
+<body>
+    <button id="replay">&#8635;</button>
+<div id="top-div"><span>διάβασέ το... </span></div>
+<button id="left" class="words">λέξη</button>
+<button id="right" class="words">άλλη λέξη</button>
+<div id="bot-div"><span>διάβασέ το... </span></div>
+<button id="skip">&rArr;</button>
+
+<audio>
+    <source type="audio/mpeg">
+</audio>
+
+</body>
+
+</html>
